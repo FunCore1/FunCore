@@ -1,3 +1,88 @@
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, Arial;
+  background: #f9fafb;
+}
+
+/* Header */
+.header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+/* Container (mx-auto flex flex-wrap p-5 ...) */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #6366f1;
+  padding: 5px;
+}
+
+.logo span {
+  margin-left: 12px;
+  font-size: 20px;
+}
+
+/* Nav (md:ml-auto) */
+.nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  color: #111827;
+}
+
+/* Button */
+.btn {
+  background: blue;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #e5e7eb;
+}
+
 /* About Hero */
 .about-hero {
   text-align: center;
