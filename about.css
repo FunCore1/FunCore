@@ -83,6 +83,20 @@ body {
   background: #e5e7eb;
 }
 
+.nav a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #4b5563;
+  transition: 0.3s;
+}
+
+/* Active (selected) link */
+.nav a.active {
+  border: 2px solid #6366f1;
+  color: #6366f1;
+}
+
 /* About Hero */
 .about-hero {
   text-align: center;
