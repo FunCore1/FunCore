@@ -23,10 +23,11 @@
       <a href="about.html">About</a>
       <a href="#">Projects</a>
       <a href="#">Beta</a>
+      <span id="userEmail" style="margin-left:10px;"></span>
     </nav>
 
     <!-- Button -->
-    <button class="btn">
+    <button class="btn" id="authBtn" onclick="openModal()">
       Get Started →
     </button>
 
@@ -118,5 +119,32 @@
     <p>© 2026 FunCore. All rights reserved.</p>
   </div>
 </footer>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal()">×</span>
+
+    <h2 id="formTitle">Login</h2>
+
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button id="mainBtn" onclick="handleAuth()">Login</button>
+
+    <p id="toggleText">
+      Don't have an account? 
+      <span onclick="toggleMode()">Sign Up</span>
+    </p>
+
+    <div class="divider">OR</div>
+
+    <button class="google" onclick="googleLogin()">Continue with Google</button>
+
+  </div>
+</div>
+<script src="script.js"></script>
+<script type="module" src="login.js"></script>
+<script type="module" src="auth.js"></script>
 </body>
 </html>
