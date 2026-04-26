@@ -1,72 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="about.css">
-  <link rel="icon" href="assets/logomin.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About - FunCore</title>
+  <link rel="icon" href="assets/logomin.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="about.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Header (same as homepage) -->
-<header class="header">
-  <div class="container">
-    <a class="logo">
-      <img src="assets/logomin.png">
-      <span>FunCore</span>
-    </a>
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/logomin.png" alt="FunCore logo" />
+        <span>FunCore</span>
+      </a>
 
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="#">Projects</a>
-      <a href="#">Beta</a>
-    </nav>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="#">Beta</a>
+      </nav>
 
-    <button class="btn">Get Started →</button>
-  </div>
-</header>
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+          <span>🌙</span>
+        </button>
+        <button class="btn">Get Started →</button>
+      </div>
+    </div>
+  </header>
 
-<!-- About Hero -->
-<section class="about-hero">
-  <h1>About FunCore</h1>
-  <p>FunCore is a platform focused on building useful tools and fun gaming experiences.</p>
-</section>
+  <main id="main">
+    <section class="about-hero reveal">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="eyebrow">About FunCore</span>
+          <h1>Where powerful tools and creative games grow together.</h1>
+          <p>
+            FunCore is built to make development smarter, faster, and more exciting
+            through reusable systems that work across both tools and games.
+          </p>
 
-<!-- What We Do -->
-<section class="about-content">
+          <div class="hero-buttons">
+            <a href="#" class="btn">Explore System</a>
+            <a href="#" class="btn btn-secondary">See Vision</a>
+          </div>
 
-  <div class="about-box">
-    <h2>🛠 Tools</h2>
-    <p>
-      We create simple and useful tools that help users solve problems and improve productivity.
-    </p>
-  </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <h3 data-count="0">0</h3>
+              <p>Tools</p>
+            </div>
+            <div class="stat">
+              <h3 data-count="0">0</h3>
+              <p>Games</p>
+            </div>
+            <div class="stat">
+              <h3 data-count="100">0</h3>
+              <p>Creative Potential</p>
+            </div>
+          </div>
+        </div>
 
-  <div class="about-box">
-    <h2>🎮 Games</h2>
-    <p>
-      We develop fun and engaging games that provide entertainment and creativity.
-    </p>
-  </div>
+        <div class="hero-card reveal">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="core-box">
+            <span>🎯 Gameplay Mechanics</span>
+            <span>🎮 Game Systems</span>
+            <span>🛠 Productivity Tools</span>
+            <span>⚡ Tool Framework</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <section class="about-section reveal">
+      <div class="container split">
+        <div>
+          <span class="section-tag">What is FunCore?</span>
+          <h2>A unified platform for building smarter.</h2>
+        </div>
+        <p>
+          FunCore is a modular platform designed to build both tools and games in one unified system.
+          It focuses on reusable components that simplify development, reduce repeated work, and improve efficiency.
+        </p>
+      </div>
+    </section>
 
-<!-- Mission -->
-<section class="mission">
-  <h2>Our Mission</h2>
-  <p>
-    To build a platform where tools and games come together to create both productivity and fun.
-  </p>
-</section>
+    <section class="about-section alt reveal">
+      <div class="container split reverse">
+        <p>
+          FunCore was created to solve a common problem — rebuilding the same systems again and again.
+          It combines tools and game architecture into one ecosystem, so ideas can move from concept to creation much faster.
+        </p>
+        <div>
+          <span class="section-tag">Why FunCore?</span>
+          <h2>Built to remove repetition and unlock creativity.</h2>
+        </div>
+      </div>
+    </section>
 
-<!-- Creator -->
-<section class="creator">
-  <h2>Who Built FunCore?</h2>
-  <p>
-    FunCore is created by a developer passionate about building tools and games that people enjoy.
-  </p>
-</section>
+    <section class="about-content reveal">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">What we do</span>
+          <h2>Two sides of the same core</h2>
+        </div>
+
+        <div class="box-grid">
+          <article class="about-box interactive-card">
+            <div class="icon">🛠</div>
+            <h3>Smart Tools</h3>
+            <p>
+              Productivity-focused tools that help automate workflows, improve efficiency,
+              and simplify development tasks.
+            </p>
+          </article>
+
+          <article class="about-box interactive-card">
+            <div class="icon">🎮</div>
+            <h3>Creative Games</h3>
+            <p>
+              Engaging game experiences powered by reusable systems, optimized for performance,
+              flexibility, and fun.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section reveal">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">What FunCore offers</span>
+          <h2>Designed for long-term creation</h2>
+        </div>
+
+        <div class="offers-grid">
+          <div class="offer-card interactive-card">⚙️ Modular systems for fast development</div>
+          <div class="offer-card interactive-card">🎮 Ready-to-use game mechanics</div>
+          <div class="offer-card interactive-card">🧩 Reusable components across projects</div>
+          <div class="offer-card interactive-card">🚀 Scalable and future-ready structure</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section reveal">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">Journey</span>
+          <h2>How FunCore grows</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span>01</span>
+            <div>
+              <h3>Build the core</h3>
+              <p>Create systems once and make them reusable everywhere.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <span>02</span>
+            <div>
+              <h3>Expand with tools</h3>
+              <p>Add productivity-focused features that solve real workflow problems.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <span>03</span>
+            <div>
+              <h3>Power game ideas</h3>
+              <p>Use the same architecture to launch fun, efficient, scalable games.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission reveal">
+      <div class="container glass">
+        <span class="section-tag">Our Mission</span>
+        <h2>To make development faster, easier, and more creative.</h2>
+        <p>
+          FunCore aims to create a platform where tools and games come together in one ecosystem,
+          helping developers build more with less repetition.
+        </p>
+      </div>
+    </section>
+
+    <section class="creator reveal">
+      <div class="container creator-card">
+        <span class="section-tag">Who built FunCore?</span>
+        <h2>A developer driven by creativity and useful systems.</h2>
+        <p>
+          FunCore is built by someone passionate about creating tools and games that people enjoy,
+          use, and remember.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const toggle = document.querySelector("[data-theme-toggle]");
+    const root = document.documentElement;
+    let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    function setTheme() {
+      root.setAttribute("data-theme", darkMode ? "dark" : "light");
+      toggle.innerHTML = darkMode ? "<span>☀️</span>" : "<span>🌙</span>";
+    }
+    setTheme();
+
+    toggle.addEventListener("click", () => {
+      darkMode = !darkMode;
+      setTheme();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const counters = document.querySelectorAll("[data-count]");
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        const target = +el.getAttribute("data-count");
+        let current = 0;
+        const increment = Math.max(1, Math.ceil(target / 40));
+
+        const update = () => {
+          current += increment;
+          if (current > target) current = target;
+          el.textContent = current + (target === 100 ? "%" : "+");
+          if (current < target) requestAnimationFrame(update);
+        };
+
+        update();
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+
+    counters.forEach((counter) => counterObserver.observe(counter));
+
+    window.addEventListener("scroll", () => {
+      const header = document.getElementById("header");
+      header.classList.toggle("scrolled", window.scrollY > 20);
+    });
+  </script>
 </body>
 </html>
