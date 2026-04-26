@@ -24,14 +24,20 @@
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
         <a href="projects.html">Projects</a>
+        <a href="team.html">Team</a>
         <a href="#">Beta</a>
       </nav>
 
       <div class="header-actions">
-        <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+        <span id="userEmail" class="user-email"></span>
+
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
           <span>🌙</span>
         </button>
-        <button class="btn">Get Started →</button>
+
+        <button class="btn" id="authBtn" type="button">Get Started →</button>
+        <button class="btn" id="settingsBtn" type="button" style="display:none;">Settings</button>
+        <button class="btn" id="logoutBtn" type="button" style="display:none;">Logout</button>
       </div>
     </div>
   </header>
@@ -49,7 +55,7 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="#" class="btn">Explore System</a>
+            <button class="btn" type="button" id="aboutExploreBtn">Explore System</button>
             <a href="#" class="btn btn-secondary">See Vision</a>
           </div>
 
@@ -211,6 +217,98 @@
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="footer-top container">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <img src="assets/funcorelogo1.png" alt="FunCore logo" />
+          <span>FunCore</span>
+        </a>
+        <p>Building useful tools and fun games with one scalable system.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="col">
+          <h3>Platform</h3>
+          <a href="tools.html">Tools</a>
+          <a href="games.html">Games</a>
+          <a href="projects.html">Projects</a>
+          <a href="#">Beta - Coming Soon</a>
+        </div>
+
+        <div class="col">
+          <h3>Company</h3>
+          <a href="about.html">About</a>
+          <a href="#">Contact - Coming Soon</a>
+          <a href="#">Team - Coming Soon</a>
+          <a href="#">Blog - Coming Soon</a>
+        </div>
+
+        <div class="col">
+          <h3>Resources</h3>
+          <a href="#">Docs - Coming Soon</a>
+          <a href="#">Support - Coming Soon</a>
+          <a href="#">FAQ - Coming Soon</a>
+          <a href="#">Privacy - Coming Soon</a>
+        </div>
+
+        <div class="col">
+          <h3>Social</h3>
+          <a href="#">YouTube - Coming Soon</a>
+          <a href="https://github.com/FunCore1" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="#">Discord - Coming Soon</a>
+          <a href="#">Twitter - Coming Soon</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 FunCore. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="loginModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <button class="close" id="closeLoginBtn" type="button" aria-label="Close login modal">×</button>
+
+      <span class="modal-tag">Access FunCore</span>
+      <h2 id="formTitle">Login</h2>
+      <p class="modal-subtitle">Continue to your FunCore space.</p>
+
+      <label for="email" class="sr-only">Email</label>
+      <input id="email" type="email" placeholder="Email" />
+
+      <label for="password" class="sr-only">Password</label>
+      <input id="password" type="password" placeholder="Password" />
+
+      <button id="mainBtn" type="button">Login</button>
+
+      <p id="toggleText">
+        Don't have an account?
+        <span id="toggleModeBtn">Sign Up</span>
+      </p>
+
+      <div class="divider">OR</div>
+
+      <button class="google" id="googleLoginBtn" type="button">Continue with Google</button>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <button class="close" id="closeSettingsBtn" type="button" aria-label="Close settings modal">×</button>
+
+      <span class="modal-tag">Profile Settings</span>
+      <h2 id="settingsTitle">Settings</h2>
+      <p class="modal-subtitle">Set your FunCore username.</p>
+
+      <label for="username" class="sr-only">Username</label>
+      <input id="username" type="text" placeholder="Enter username" maxlength="30" />
+
+      <button id="saveUsernameBtn" type="button">Save Username</button>
+    </div>
+  </div>
+
   <script>
     const toggle = document.querySelector("[data-theme-toggle]");
     const root = document.documentElement;
@@ -218,11 +316,14 @@
 
     function setTheme() {
       root.setAttribute("data-theme", darkMode ? "dark" : "light");
-      toggle.innerHTML = darkMode ? "<span>☀️</span>" : "<span>🌙</span>";
+      if (toggle) {
+        toggle.innerHTML = darkMode ? "<span>☀️</span>" : "<span>🌙</span>";
+      }
     }
+
     setTheme();
 
-    toggle.addEventListener("click", () => {
+    toggle?.addEventListener("click", () => {
       darkMode = !darkMode;
       setTheme();
     });
@@ -263,8 +364,21 @@
 
     window.addEventListener("scroll", () => {
       const header = document.getElementById("header");
-      header.classList.toggle("scrolled", window.scrollY > 20);
+      if (header) {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      }
+    });
+
+    document.getElementById("authBtn")?.addEventListener("click", () => {
+      window.openModal?.();
+    });
+
+    document.getElementById("aboutExploreBtn")?.addEventListener("click", () => {
+      window.openModal?.();
     });
   </script>
+
+  <script type="module" src="login.js"></script>
+  <script type="module" src="auth.js"></script>
 </body>
 </html>

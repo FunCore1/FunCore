@@ -12,6 +12,18 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .hidden { display: none !important; }
+
+    .modal {
+      display: none;
+    }
+
+    .modal.active {
+      display: grid;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -27,17 +39,27 @@
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
+        <a href="team.html">Team</a>
         <a href="#">Beta</a>
-        <span id="userEmail" class="user-email"></span>
       </nav>
 
       <div class="header-actions">
+        <span id="userEmail" class="user-email"></span>
+
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
           <span class="theme-icon">◐</span>
         </button>
 
-        <button class="btn" id="authBtn" type="button" onclick="openModal()">
+        <button class="btn" id="authBtn" type="button">
           Get Started →
+        </button>
+
+        <button class="btn" id="settingsBtn" type="button" style="display:none;">
+          Settings
+        </button>
+
+        <button class="btn" id="logoutBtn" type="button" style="display:none;">
+          Logout
         </button>
 
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -59,7 +81,7 @@
           </p>
 
           <div class="hero-actions">
-            <button class="btn" type="button" onclick="openModal()">Start with FunCore</button>
+            <button class="btn" type="button" id="heroStartBtn">Start with FunCore</button>
             <a href="about.html" class="btn btn-ghost">Learn More</a>
           </div>
 
@@ -155,7 +177,7 @@
     <div class="footer-top container">
       <div class="footer-brand">
         <a class="logo" href="index.html">
-          <img src="assets/logomin.png" alt="FunCore logo" />
+          <img src="assets/funcorelogo1.png" alt="FunCore logo" />
           <span>FunCore</span>
         </a>
         <p>Building useful tools and fun games with one scalable system.</p>
@@ -167,6 +189,7 @@
           <a href="tools.html">Tools</a>
           <a href="games.html">Games</a>
           <a href="projects.html">Projects</a>
+          <a href="team.html">Team</a>
           <a href="#">Beta - Coming Soon</a>
         </div>
 
@@ -203,7 +226,7 @@
 
   <div id="loginModal" class="modal" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="formTitle">
-      <button class="close" type="button" onclick="closeModal()" aria-label="Close login modal">×</button>
+      <button class="close" id="closeLoginBtn" type="button" aria-label="Close login modal">×</button>
 
       <span class="modal-tag">Access FunCore</span>
       <h2 id="formTitle">Login</h2>
@@ -215,16 +238,31 @@
       <label for="password" class="sr-only">Password</label>
       <input id="password" type="password" placeholder="Password" />
 
-      <button id="mainBtn" type="button" onclick="handleAuth()">Login</button>
+      <button id="mainBtn" type="button">Login</button>
 
       <p id="toggleText">
         Don't have an account?
-        <span onclick="toggleMode()">Sign Up</span>
+        <span id="toggleModeBtn">Sign Up</span>
       </p>
 
       <div class="divider">OR</div>
 
-      <button class="google" type="button" onclick="googleLogin()">Continue with Google</button>
+      <button class="google" id="googleLoginBtn" type="button">Continue with Google</button>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <button class="close" id="closeSettingsBtn" type="button" aria-label="Close settings modal">×</button>
+
+      <span class="modal-tag">Profile Settings</span>
+      <h2 id="settingsTitle">Settings</h2>
+      <p class="modal-subtitle">Set your FunCore username.</p>
+
+      <label for="username" class="sr-only">Username</label>
+      <input id="username" type="text" placeholder="Enter username" maxlength="30" />
+
+      <button id="saveUsernameBtn" type="button">Save Username</button>
     </div>
   </div>
 
@@ -243,6 +281,7 @@
     const nav = document.getElementById("nav");
 
     menuToggle?.addEventListener("click", () => {
+      if (!nav) return;
       nav.classList.toggle("nav-open");
       const expanded = nav.classList.contains("nav-open");
       menuToggle.setAttribute("aria-expanded", expanded);
@@ -263,7 +302,6 @@
     });
   </script>
 
-  <script src="script.js"></script>
   <script type="module" src="login.js"></script>
   <script type="module" src="auth.js"></script>
 </body>

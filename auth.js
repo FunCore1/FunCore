@@ -1,80 +1,121 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { auth } from "./firebase-config.js";
+import {
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDaW20Fgd6MT6G7ng83MZoelzJjQM4ijXc",
-  authDomain: "funcore-ef763.firebaseapp.com",
-  projectId: "funcore-ef763",
-  storageBucket: "funcore-ef763.firebasestorage.app",
-  messagingSenderId: "833104940773",
-  appId: "1:833104940773:web:63a3f47b3e147b6299ce0c"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// ✅ Wait for DOM
 window.addEventListener("DOMContentLoaded", () => {
+  const loginModal = document.getElementById("loginModal");
+  const settingsModal = document.getElementById("settingsModal");
 
-  const modal = document.getElementById("loginModal");
   const userText = document.getElementById("userEmail");
-  const btn = document.getElementById("authBtn");
+  const authBtn = document.getElementById("authBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const settingsBtn = document.getElementById("settingsBtn");
+  const closeLoginBtn = document.getElementById("closeLoginBtn");
+  const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+  const saveUsernameBtn = document.getElementById("saveUsernameBtn");
+  const usernameInput = document.getElementById("username");
 
-  let firstCheck = true;
+  window.openModal = function () {
+    if (!loginModal) return;
+    loginModal.style.display = "flex";
+    loginModal.setAttribute("aria-hidden", "false");
+  };
+
+  window.closeModal = function () {
+    if (!loginModal) return;
+    loginModal.style.display = "none";
+    loginModal.setAttribute("aria-hidden", "true");
+  };
+
+  window.openSettingsModal = function () {
+    if (!settingsModal) return;
+    settingsModal.style.display = "flex";
+    settingsModal.setAttribute("aria-hidden", "false");
+
+    if (auth.currentUser && usernameInput) {
+      usernameInput.value = auth.currentUser.displayName || "";
+    }
+  };
+
+  window.closeSettingsModal = function () {
+    if (!settingsModal) return;
+    settingsModal.style.display = "none";
+    settingsModal.setAttribute("aria-hidden", "true");
+  };
+
+  authBtn?.addEventListener("click", window.openModal);
+  closeLoginBtn?.addEventListener("click", window.closeModal);
+  settingsBtn?.addEventListener("click", window.openSettingsModal);
+  closeSettingsBtn?.addEventListener("click", window.closeSettingsModal);
+
+  logoutBtn?.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      window.closeSettingsModal?.();
+      alert("Logged out successfully.");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  });
+
+  saveUsernameBtn?.addEventListener("click", async () => {
+    const username = usernameInput?.value.trim();
+
+    if (!auth.currentUser) {
+      alert("Please login first.");
+      return;
+    }
+
+    if (!username) {
+      alert("Please enter a username.");
+      return;
+    }
+
+    try {
+      await updateProfile(auth.currentUser, { displayName: username });
+      if (userText) userText.textContent = username;
+      alert("Username updated successfully.");
+      window.closeSettingsModal?.();
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  });
 
   onAuthStateChanged(auth, async (user) => {
-
-    // ❌ Not logged in
     if (!user) {
-      if (firstCheck) {
-        modal.style.display = "flex";
-        firstCheck = false;
-      }
-
-      // reset button
-      if (btn) {
-        btn.innerText = "Get Started →";
-        btn.onclick = openModal;
-      }
-
-      if (userText) userText.innerText = "";
-
+      if (userText) userText.textContent = "";
+      if (authBtn) authBtn.style.display = "inline-flex";
+      if (settingsBtn) settingsBtn.style.display = "none";
+      if (logoutBtn) logoutBtn.style.display = "none";
       return;
     }
 
-    // 🔄 reload user to check verification
-    await user.reload();
+    try {
+      await user.reload();
+    } catch (error) {
+      console.error(error);
+    }
 
-    // ❌ Block unverified users
-    if (!user.emailVerified) {
-      alert("Please verify your email first (check spam folder)");
+    const isPasswordUser = user.providerData.some((p) => p.providerId === "password");
 
-      modal.style.display = "flex";
-
+    if (isPasswordUser && !user.emailVerified) {
+      alert("Please verify your email first.");
       await signOut(auth);
+      window.openModal?.();
       return;
     }
 
-    // ✅ Verified user
-    modal.style.display = "none";
+    if (authBtn) authBtn.style.display = "none";
+    if (settingsBtn) settingsBtn.style.display = "inline-flex";
+    if (logoutBtn) logoutBtn.style.display = "inline-flex";
 
     if (userText) {
-      userText.innerText = user.email;
+      userText.textContent = user.displayName || user.email || "User";
     }
-
-    // 🔥 Change button to logout
-    if (btn) {
-      btn.innerText = "Logout";
-      btn.onclick = logout;
-    }
-
   });
-
 });
-
-// 🚪 Logout function
-window.logout = () => {
-  signOut(auth).then(() => {
-    document.getElementById("loginModal").style.display = "flex";
-  });
-};
